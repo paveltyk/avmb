@@ -38,6 +38,6 @@ class ApplicationController < ActionController::Base
   end
 
   def hide_ads?
-    !!session[:hide_ads]
+    true
   end
 end

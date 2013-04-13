@@ -1,5 +1,6 @@
 AvMobile::Application.routes.draw do
-  root :to => 'welcome#index'
+  root :to => 'welcome#shutdown_notice'
+  match '*path' => redirect('/', status: 302)
   match 'login' => 'user_sessions#new', via: :get, as: :login
   match 'login' => 'user_sessions#verify_code', via: :put
   match 'login' => 'user_sessions#create', via: :post
