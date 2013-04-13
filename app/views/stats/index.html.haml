@@ -1,0 +1,6 @@
+.row
+  .span12
+    %h1 Самые продаваемые автомобили
+    %ul.unstyled
+      - data.each do |row|
+        %li <span class="label label-info">#{number_with_delimiter row['count'].to_i}</span> #{row['name']}

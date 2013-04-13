@@ -1,0 +1,15 @@
+- content_for(:title) { 'Введите Код :: AvMobile' }
+.row
+  .span3
+    = form_tag do
+      = hidden_field_tag :phone, @user.phone
+      %fieldset
+        .visible-desktop
+          %legend Вход
+        .alert.alert-success.sent
+          Мы выслали код на номер <b>#{phone @user.phone}</b>. СМС с кодом будет доставлено в течение одной минуты.
+        .control-group
+          = label_tag :phone, 'Код (четыре латинских символа)'
+          = text_field_tag :code, nil, class: 'input-medium code', placeholder: 'xxxx'
+        .form-actions
+          #{link_to 'Назад', login_path,  class: 'btn'}&nbsp;&nbsp;#{submit_tag 'Проверить', class: 'btn btn-primary'}

@@ -1,0 +1,9 @@
+#adsModal.modal.hide.fade
+  .modal-header
+    = button_tag '×', class: 'close', data: {dismiss: 'modal'}
+    %h3 Убрать рекламу со всего сайта?
+  .modal-body
+    %p <b>$80.00</b> - такой счет ежемесячно выставляют мне #{link_to 'Amazon S3', 'http://aws.amazon.com/s3/', target: '_blank'}, #{link_to 'Heroku', 'http://www.heroku.com/', target: '_blank'} и #{link_to 'Twilio', 'http://www.twilio.com/', target: '_blank'} за пользование их сервисами. Для Вас вся информация на сайте  <b>бесплатна</b>, так же как и отправка СМС сообщений на мобильные телефоны. Реклама - единственная возможность для меня уменьшить затраты на поддержание сайта.
+  .modal-footer
+    = link_to 'Убрать рекламу', '#ads-confirm', class: 'btn btn-danger', id: 'remove-ads', data: {dismiss: 'modal', url: hide_ads_path}
+    = link_to 'Я передумал, оставьте рекламу', '#ads-cancel', class: 'btn btn-success', data: {dismiss: 'modal'}

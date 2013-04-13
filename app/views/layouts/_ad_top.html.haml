@@ -1,0 +1,11 @@
+.container.ad-container.visible-desktop
+  .row
+    .span12
+      .ads-wide
+        = link_to 'Убрать [X]', '#adsModal', class: 'remove-ads', title: 'Я уважаю Ваше решение', data: {toggle: 'modal'}
+        :javascript
+          google_ad_client = "ca-pub-0774255313934880";
+          google_ad_slot = "7162340758";
+          google_ad_width = 728;
+          google_ad_height = 90;
+        = javascript_include_tag 'http://pagead2.googlesyndication.com/pagead/show_ads.js'

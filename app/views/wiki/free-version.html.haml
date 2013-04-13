@@ -1,0 +1,31 @@
+- content_for(:title) { 'Выберете план СМС подписки' }
+.price-table
+  .row
+    .span12
+      %h1 Выберете план СМС подписки
+  .row
+    .span2.offset2.well.item
+      .plan.btn-info.hidden-phone +1
+      %ul.unstyled.details
+        %li 1 фильтр
+        %li до 1-ой СМС в день
+      %h3.price БЕСПЛАТНО
+      = link_to 'Подписаться', sms_notification_step1_path, class: 'btn btn-large btn-info'
+    .span2.well.item.hidden-phone
+      .plan +5
+      %ul.unstyled.details
+        %li 2 фильтра
+        %li до 5-и СМС в день
+      %h3.price &nbsp;
+      = button_tag 'Недоступно', class: 'btn btn-large', disabled: true
+    .span2.well.item.hidden-phone
+      .plan +10
+      %ul.unstyled.details
+        %li 4 фильтра
+        %li до 10-и СМС в день
+      %h3.price &nbsp;
+      = button_tag 'Недоступно', class: 'btn btn-large', disabled: true
+  .row
+    .span12
+      %p
+        %small *на данный момент доступна только БЕСПЛАТНАЯ версия

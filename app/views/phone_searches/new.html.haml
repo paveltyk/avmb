@@ -1,0 +1,13 @@
+- content_for(:title) { 'Поиск объявлений по номеру телефона продавца :: AvMobile' }
+.phone-search
+  .row
+    .span6.offset3
+      %h1 Поиск объявлений по номеру телефона
+  .row
+    .span6.offset3
+      = render_flash_messages
+      .phone-search-form
+        = form_tag do
+          %fieldset
+            = text_field_tag :phone_number, nil, class: 'input-medium phone', type: 'tel', placeholder: '+375 xx xxx xx xx'
+            = submit_tag 'Найти этот номер!', class: 'btn btn-warning btn-large'

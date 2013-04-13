@@ -1,0 +1,86 @@
+- content_for(:title) { 'Новое объявление' }
+.row
+  .span5
+    = form_for blurb, url: my_blurbs_path, html: {class: 'form-horizontal'} do |f|
+      %legend Новое объявление
+      .control-group{class: ('error' if blurb.errors[:name].present?) }
+        = f.label :name, 'Марка и модель', class: 'control-label'
+        .controls= f.text_field :name, class: 'span car-name-autocomplete', placeholder: 'BMW 7-reihe (E66)', autocomplete: 'off', 'data-my-typeahead-source' => '#car-name-list'
+
+      .control-group{class: ('error' if blurb.errors[:year].present?) }
+        = f.label :year, 'Год выпуска', class: 'control-label'
+        .controls= f.text_field :year, class: 'span2', placeholder: '2002'
+
+      .control-group{class: ('error' if blurb.errors[:price_value].present?) }
+        = f.label :price_value, 'Цена', class: 'control-label'
+        .controls
+          .input-append #{f.text_field :price_value, class: 'span2', placeholder: '24900'}<span class='add-on'>$</span>
+
+      .control-group{class: ('error' if blurb.errors[:mileage_value].present?) }
+        = f.label :mileage_value, 'Пробег', class: 'control-label'
+        .controls
+          .input-append #{f.text_field :mileage_value, class: 'span2', placeholder: '218640'}<span class='add-on'>км.</span>
+
+      .control-group{class: ('error' if blurb.errors[:city].present?) }
+        = f.label :city, 'Город', class: 'control-label'
+        .controls= f.text_field :city, class: 'span2', placeholder: 'Минск', 'data-my-typeahead-source' => '#city-autocomplete-source'
+
+      .control-group{class: ('error' if blurb.errors[:country].present?) }
+        = f.label :country, 'Страна', class: 'control-label'
+        .controls= f.text_field :country, class: 'span2', placeholder: 'Беларусь', 'data-my-typeahead-source' => '#country-autocomplete-source'
+      %hr
+
+      .control-group{class: ('error' if blurb.errors[:fuel_type].present?) }
+        = f.label :fuel_type, 'Тип двигателя', class: 'control-label'
+        .controls= f.text_field :fuel_type, class: 'span2', placeholder: 'бензиновый', 'data-my-typeahead-source' => '#fuel-type-autocomplete-source'
+
+      .control-group{class: ('error' if blurb.errors[:engine_value].present?) }
+        = f.label :engine_value, 'Объем двигателя', class: 'control-label'
+        .controls
+          .input-append #{f.text_field :engine_value, class: 'span2', placeholder: '4500'}<span class='add-on'>см<sup>2</sup></span>
+
+      .control-group{class: ('error' if blurb.errors[:cylinders_count].present?) }
+        = f.label :cylinders_count, 'Количество цилиндров', class: 'control-label'
+        .controls= f.text_field :cylinders_count, class: 'span2', placeholder: '8'
+
+      %hr
+
+      .control-group{class: ('error' if blurb.errors[:body_type].present?) }
+        = f.label :body_type, 'Тип кузова', class: 'control-label'
+        .controls= f.text_field :body_type, class: 'span2', placeholder: 'седан', 'data-my-typeahead-source' => '#body-type-autocomplete-source'
+
+      .control-group{class: ('error' if blurb.errors[:color].present?) }
+        = f.label :color, 'Цвет кузова', class: 'control-label'
+        .controls= f.text_field :color, class: 'span2', placeholder: 'черный металик', 'data-my-typeahead-source' => '#body-color-autocomplete-source'
+
+      .control-group{class: ('error' if blurb.errors[:doors_count].present?) }
+        = f.label :doors, 'Количество дверей', class: 'control-label'
+        .controls= f.text_field :doors, class: 'span2', placeholder: '5'
+
+      %hr
+
+      .control-group{class: ('error' if blurb.errors[:transmission].present?) }
+        = f.label :transmission, 'Трансмиссия', class: 'control-label'
+        .controls= f.text_field :transmission, class: 'span2', placeholder: 'Автоматическая', 'data-my-typeahead-source' => '#transmission-autocomplete-source'
+
+      .control-group{class: ('error' if blurb.errors[:drive_type].present?) }
+        = f.label :drive_type, 'Привод', class: 'control-label'
+        .controls= f.text_field :drive_type, class: 'span2', placeholder: 'Задний', 'data-my-typeahead-source' => '#drive-type-autocomplete-source'
+
+
+      %hr
+        .control-group
+          = f.label :photos, 'Фотографии', class: 'control-label'
+          .controls
+            = f.fields_for :photos do |photo|
+              = photo.file_field :image
+            %p.help-block <small>Размер каждого файла не должен превышать 1Мб</small>
+      .form-actions= f.submit 'Сохранить и опубликовать', class: 'btn'
+
+#city-autocomplete-source{{ 'data-json' => Blurb.distinct_cities.to_json }}
+#country-autocomplete-source{{ 'data-json' => Blurb.distinct_countries.to_json }}
+#fuel-type-autocomplete-source{{ 'data-json' => Blurb.distinct_fuel_types.to_json }}
+#body-type-autocomplete-source{{ 'data-json' => Blurb.distinct_body_types.to_json }}
+#body-color-autocomplete-source{{ 'data-json' => Blurb.distinct_body_colors.to_json }}
+#transmission-autocomplete-source{{ 'data-json' => Blurb.distinct_transmission.to_json }}
+#drive-type-autocomplete-source{{ 'data-json' => Blurb.distinct_drive_types.to_json }}

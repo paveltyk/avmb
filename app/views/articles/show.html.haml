@@ -1,0 +1,5 @@
+- content_for(:title) { "#{article.title} :: AvMobile" }
+.row
+  .span12
+    %h1= article.title
+    = article.to_html

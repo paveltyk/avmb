@@ -1,0 +1,17 @@
+.row
+  .span12
+    = link_to '<i class="icon-plus icon-white"></i> New article'.html_safe, new_admin_article_path, class: 'btn btn-primary'
+.row
+  .span12
+    = render_flash_messages
+    %table.table.table-striped
+      %thead
+        %tr
+          %th Body
+          %th Actions
+      %tbody
+        - articles.each do |article|
+          %tr
+            %td= truncate article.body.to_s
+            %td
+              = link_to 'Edit', edit_admin_article_path(article), class: 'btn btn-primary btn-small'

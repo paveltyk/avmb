@@ -1,0 +1,22 @@
+- if search_queries.present?
+  .row
+    .span12
+      %table.table.table-striped
+        %thead
+          %tr
+            %th Название
+            %th Действия
+        %tbody
+          - search_queries.each do |query|
+            %tr
+              %td= query.to_search
+              %td= link_to '<i class="icon-trash icon-white"></i> <span class="visible-desktop">Удалить</span>'.html_safe, my_search_query_path(query), class: 'btn btn-small btn-danger', method: :delete
+  .row
+    .span12
+      = link_to 'Создать новую СМС подписку', free_wiki_path, class: 'btn btn-info'
+- else
+  .row
+    .span12
+      .well
+        У Вас пока нет ни одной подписки.
+        #{link_to 'Подпишитесь сейчас', free_wiki_path} и получайте СМС бесплатно.

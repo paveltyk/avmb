@@ -1,0 +1,14 @@
+development:
+  #uri: mongodb://heroku_app6140623:a4bhp1podsusv3vhb0leailpue@ds031077.mongolab.com:31077/heroku_app6140623
+  host: localhost
+  database: av_mobile_development
+
+test:
+  host: localhost
+  database: av_mobile_test
+
+staging:
+  uri: <%= ENV['MONGOLAB_URI'] %>
+
+production:
+  uri: <%= ENV['MONGOLAB_URI'] %>

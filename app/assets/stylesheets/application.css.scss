@@ -1,0 +1,92 @@
+@import 'twitter/bootstrap';
+body {padding-top:58px;}
+@import 'twitter/responsive';
+
+.clr {clear:both;border:none;height:0;}
+.lead {font-weight:400;}
+
+#blurbs-list tr {cursor:pointer;}
+#blurbs-list tr.new td {background-color:#e5f3ff;}
+#blurbs-list tr.new:nth-child(odd) td {background-color:#d2e2ff;}
+#blurbs-list tr.new:hover td{background-color:#f5f5f5;}
+#blurbs-list td {vertical-align:middle;}
+#blurbs-list td.avatar {width:1%;}
+#blurbs-list td.avatar .thumbnail {vertical-align:middle;padding:1px;@include border-radius(0);}
+#blurbs-list td.avatar .thumbnail img {height:44px;}
+
+.icon-cash, .icon-engine, .icon-transmission, .icon-body, .icon-phone {background-image:image-url('icon-car-sprite.png');background-position:0 0;}
+.icon-cash {background-position:0 0;}
+.icon-engine {background-position:0 -14px;}
+.icon-transmission {background-position:0 -28px;}
+.icon-body {background-position:0 -42px;}
+.icon-phone {background-position:0 -56px;}
+
+.featureicon {width:64px;float:left;margin-right:20px;}
+.featuredesc h3 {font-size:17px;}
+.icon-search-full, .icon-phone-full, .icon-mail-full {height:64px;width:64px;background-image:image-url('stylistica-sprite-128x128.png');}
+.icon-search-full {background-position:0 0;}
+.icon-phone-full {background-position:0 -64px;}
+.icon-mail-full {background-position:0 -128px;}
+.well.incomplete {opacity:.4;}
+
+.footer {margin-top:45px;padding:35px 0 36px;border-top:1px solid #E5E5E5;}
+.footer p {color:#999;font-size:.85em;}
+
+.cta-sms {text-align:center;margin:50px 0 90px;}
+.cta-sms .btn-large {font-size:20px;padding:14px 24px;}
+.phone-verification {text-align:center;}
+#verify-code {display:none;}
+#verify-code, #get-phone { .alert {max-width:400px;margin:0 auto 18px;} }
+.sms-left {margin-top:20px;}
+
+.landing .promo {margin:100px 0 70px;}
+.landing .promo p.l1 {font-size:60px;}
+.landing .promo p.l2 {font-size:48px;}
+.landing .promo p.l1, .landing .promo p.l2 {color:#444;text-align:center;line-height:120%;}
+.landing .promo p.l1 b, .landing .promo p.l2 b {color:black;text-shadow:1px 1px 2px gray;}
+.landing .promo .add-blurb {margin:30px auto 0;display:block;width:400px;font-size:28px;padding-top:15px;padding-bottom:15px;}
+.landing .details a.btn {display:block;}
+
+.price-table {margin-top:20px;}
+.price-table h1 {margin-bottom:20px;text-align:center;}
+.price-table .item {text-align:center;}
+.price-table .item .plan {background-color:#999;border:1px solid whiteSmoke;height:100px;-moz-border-radius:75px;-webkit-border-radius:75px;width:100px;margin:0 auto;line-height:100px;text-align:center;color:white;font-size:24px;}
+.price-table .item ul.details {margin:18px 0;}
+.price-table .item ul.details li {margin:18px 10px;padding-bottom:10px;border:0;border-bottom:1px solid #E5E5E5;color:#999;}
+.price-table .item .price {margin-bottom:15px;}
+
+.similar-blurbs.short tr:nth-child(n+3) {display:none;}
+
+.ads-wide {position:relative;padding-top:5px;margin-bottom:15px;text-align:center;background:image-url('hatch_lgray.png') repeat;}
+.ads-wide .remove-ads {position:absolute;top:2px;right:5px;}
+
+@media (max-width: 480px) {
+  .thumbnails > li {margin-left:0;}
+  .featureicon {width:32px;float:left;margin-right:15px;margin-left:-5px;}
+  .featuredesc {margin-left:47px;}
+  .icon-search-full, .icon-phone-full, .icon-mail-full {height:32px;width:32px;background-image:image-url('stylistica-sprite-32x32.png');}
+  .icon-search-full {background-position:0 0;}
+  .icon-phone-full {background-position:0 -32px;}
+  .icon-mail-full {background-position:0 -64px;}
+  .similar-blurbs.short tr:nth-child(n+3) {display:table-row;}
+}
+
+@media (max-width:768px) {
+  .cta-sms .btn-large {display:block;margin:0 auto;}
+  .cta-sms {margin:0 0 20px;}
+  .cta-sms .pay {margin:20px 0;}
+  .price-table .item .btn {display:block;}
+  .price-table {margin-top:0;}
+  .price-table .item ul.details {margin-top:0;}
+  .price-table .item ul.details li:first-child {margin-top:0;}
+}
+
+@media (min-width:768px) and (max-width: 979px) {
+  .featureicon {float:none;margin:0 auto 20px;}
+}
+
+@media (min-width:768px) {
+  .phone-search .phone-search-form input.phone {display:block;height:65px;padding:15px 0;width:100%;margin-bottom:30px;font-size:65px;line-height:65px;text-align:center;}
+  .phone-search .phone-search-form input[type="submit"] {display:block;width:100%;font-size:50px;line-height:60px;}
+  .phone-search h1 {margin:20px 0 50px;padding-bottom:30px;border-bottom:3px dashed #efefef;text-align:center;}
+}

@@ -1,0 +1,59 @@
+- content_for(:title) { ['Объявление - Продажа', blurb_decorator.name, blurb_decorator.engine, blurb_decorator.created_at].delete_if(&:blank?).join(' :: ') }
+.row
+  .span6
+    %h4= blurb_decorator.name
+    %ul.unstyled
+      %li=raw "<i class=\"icon-cash\"></i>&nbsp;#{h blurb_decorator.price}"
+      %li=raw "<i class=\"icon-engine\"></i>&nbsp;#{h blurb_decorator.engine}"
+      %li=raw "<i class=\"icon-transmission\"></i>&nbsp;#{h blurb_decorator.transmission}"
+      %li=raw "<i class=\"icon-body\"></i>&nbsp;#{h blurb_decorator.body}"
+      %li
+        =raw "<i class=\"icon-phone\"></i>&nbsp;#{h blurb_decorator.phone}"
+        - if blurbs_with_same_phone_count > 0
+          = link_to blurbs_with_phone_path(blurb.phone.parameterize), title: 'Все объявления с таким же номером телефона' do
+            (+#{blurbs_with_same_phone_count} обявлений с таким номером)
+      - if blurb_decorator.mileage.present?
+        %li=raw "<i class=\"icon-road\"></i>&nbsp;#{h blurb_decorator.mileage}"
+      - if blurb_decorator.message.present?
+        %li.expandable=raw "<i class=\"icon-comment\"></i>&nbsp;#{h blurb_decorator.message}"
+      - if blurb_decorator.equipment.present?
+        %li.expandable=raw "<i class=\"icon-tags\"></i>&nbsp;#{h blurb_decorator.equipment}"
+      - if blurb_decorator.location.present?
+        %li=raw "<i class=\"icon-globe\"></i>&nbsp; #{h blurb_decorator.location}"
+      %li=raw "<i class=\"icon-calendar\"></i>&nbsp;Объявление добавлено #{h blurb_decorator.created_at}"
+      - if similar_blurbs.count > 0
+        %li.visible-phone=raw "<i class=\"icon-eye-open\"></i>&nbsp;#{link_to "Похожие объявления (#{similar_blurbs.count})", blurbs_path(car_hash: blurb.car_hash), class: 'show-similar-blurbs'}"
+  - if similar_blurbs.count > 0
+    .span6.hidden-phone.similar-blurbs.short
+      %h4 Похожие объявления
+      %table#blurbs-list.table.table-striped
+        %tbody
+          - BlurbDecorator.decorate(similar_blurbs).each do |b|
+            %tr{ 'data-url' => blurb_path(b) }
+              %td.avatar
+                .span1.thumbnail= image_tag b.avatar_path
+              %td= b.name
+              %td= b.created_at
+              %td= b.price
+      - if similar_blurbs.count > 2
+        .hidden-phone.pager= link_to "Показать все (#{similar_blurbs.count})", '#', class: 'expand-similar-blurbs'
+-if blurb_decorator.has_photos?
+  .row
+    .span12
+      %hr
+      %ul.thumbnails
+        - blurb_decorator.photos.each do |photo|
+          %li.span6
+            .thumbnail= image_tag(photo.image(:medium))
+
+  .row.hidden-desktop
+    .span12
+      %ul.pager
+        %li= link_to 'В начало', '#', class: 'to-top'
+
+.row
+  .span12
+    %ul.pager
+      %li= link_to 'Оригинал объявления', blurb_decorator.original_post_url
+
+= render '/google/conversions/show_blurb'

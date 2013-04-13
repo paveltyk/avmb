@@ -1,0 +1,44 @@
+= form_for search, url: edit_search_path, html: {method: 'put', class: 'search', id: 'expanded-search'} do |f|
+  = hidden_field_tag :redirect_to, params[:redirect_to]
+  %fieldset
+    .visible-desktop
+      %legend Расширенный поиск
+    .control-group
+      = f.label :name, 'Название/марка авто'
+      = f.text_field :name, placeholder: 'Марка и модель', autocomplete: 'off', 'data-my-typeahead-source' => '#car-name-list'
+    .control-group
+      = f.label :start_year, 'Год'
+      = f.select :start_year, year_options_for_select, {include_blank: true}, class: 'input-small'
+      &mdash;
+      = f.select :end_year, year_options_for_select, {include_blank: true}, class: 'input-small'
+    .control-group
+      = f.label :start_price, 'Цена'
+      = f.select :start_price, price_options_for_select, {include_blank: true}, class: 'input-small'
+      &mdash;
+      = f.select :end_price, price_options_for_select, {include_blank: true}, class: 'input-small'
+    .control-group
+      = f.label :start_engine_value, 'Объем двигателя'
+      = f.select :start_engine_value, engine_value_options_for_select, {include_blank: true}, class: 'input-small'
+      &mdash;
+      = f.select :end_engine_value, engine_value_options_for_select, {include_blank: true}, class: 'input-small'
+    .control-group
+      = f.label :fuel_type, 'Тип топлива'
+      = f.select :fuel_type, fuel_type_options_for_select, {include_blank: true}, class: 'input-medium'
+    .control-group
+      = f.label :transmission, 'Трансмиссия'
+      = f.select :transmission, transmission_options_for_select, {include_blank: true}, class: 'input-medium'
+    .control-group
+      = f.label :body_type, 'Кузов'
+      = f.select :body_type, body_type_options_for_select, {include_blank: true}, class: 'input-medium'
+    .control-group
+      = f.label :equipment, 'Комплектация'
+      = f.select :equipment, equipment_options_for_select, {}, class: 'input-medium', multiple: true
+    .control-group
+      = f.label :show_outdated, class: 'checkbox' do
+        = f.check_box :show_outdated
+        Показывать старые объявления
+      %p.show-outdated-desc{class: ('hidden' if f.object.show_outdated?)}
+        %small В результатах поиска будут отображаться объявления <u>страше двух недель</u>
+    .form-actions
+      = submit_tag 'Поиск', class: 'btn btn-primary'
+      %button.btn.clear-form Очистить

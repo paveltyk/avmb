@@ -1,0 +1,14 @@
+- content_for(:title) { 'СМС Уведомления :: AvMobile' }
+.row
+  = render 'step_list'
+.cta-sms
+  .row
+    .span12= link_to 'Подписаться сейчас *', free_wiki_path, class: 'btn btn-info btn-large'
+
+.row
+  .span12
+    %p
+      %small *на данный момент доступна только БЕСПЛАТНАЯ версия (#{link_to 'подробнее', free_wiki_path})
+      %br
+      %small
+        *если Вы хотите отписаться от СМС уведомлений, #{link_to 'нажмите сюда', my_search_queries_path}

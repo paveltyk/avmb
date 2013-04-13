@@ -1,0 +1,18 @@
+- content_for(:title) { 'Мои объявления' }
+.row
+  .span12
+    %h1
+      Мои объявления
+      = link_to 'Добавить новое объявление', new_my_blurb_path, class: 'btn btn-success pull-right'
+  .span12
+    = render_flash_messages
+    %table.table.table-striped
+      %tbody
+        - BlurbDecorator.decorate(blurbs).each do |blurb|
+          %tr
+            %td= blurb.name
+            %td
+              .pull-right
+                = link_to '<i class=" icon-eye-open"></i> <span class="visible-desktop">Показать</span>'.html_safe, blurb_path(blurb), class: 'btn btn-mini'
+                =# link_to '<i class="icon-pencil"></i> <span class="visible-desktop">Изменить</span>'.html_safe, '#', class: 'btn btn-mini'
+                = link_to '<i class="icon-trash icon-white"></i> <span class="visible-desktop">Удалить</span>'.html_safe, my_blurb_path(blurb), class: 'btn btn-mini btn-danger', method: :delete, confirm: 'Вы уверены?'

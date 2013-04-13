@@ -1,0 +1,9 @@
+- content_for(:title) { 'Спасибо за СМС подписку' }
+.row
+  = render partial: 'step_list', locals: {step: 3}
+.row
+  .span12
+    %h2  Спасибо!
+    %p.lead
+      Как только появится новое объявление, удовлетворяющее Вашим требованиям, мы отправим СМС на номер <b style="white-space:nowrap">#{phone(params[:phone])}</b>
+  .span12= link_to 'Готово', blurbs_path, class: 'btn btn-large btn-success'

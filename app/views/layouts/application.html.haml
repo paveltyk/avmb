@@ -1,0 +1,70 @@
+!!!
+%html
+  %head
+    %meta{ 'charset' => 'utf-8' }
+    %meta{ 'http-equiv' => 'content-type', :content => 'text/html;charset=utf-8' }
+    %meta{ 'name' => 'apple-mobile-web-app-capable', 'content' => 'yes' }
+    %meta{ 'name' => 'viewport', 'content' => 'width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no' }
+    %link{ href: 'http://fonts.googleapis.com/css?family=Droid+Sans:400,700', rel: 'stylesheet', type: 'text/css' }
+    %title= content_for?(:title) ? yield(:title) : "Продажа авто Минск. AvMobile :: Страница #{params[:page] || 1}"
+    /[if lt IE 9]
+      = javascript_include_tag 'http://html5shim.googlecode.com/svn/trunk/html5.js'
+    = stylesheet_link_tag :application, media: 'all'
+    = csrf_meta_tags
+    = yield :head
+    - if Rails.env.production?
+      :javascript
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-11357677-8']);
+        _gaq.push(['_setDomainName', 'avmb.by']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+  %body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          = link_to 'AvMobile', blurbs_path, class: 'brand'
+          %a.btn.btn-navbar{'data-toggle' => 'collapse', 'data-target' => '.nav-collapse'}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          .nav-collapse
+            %ul.nav.pull-right
+              %li
+                - if logged_in?
+                  = link_to '<i class="icon-list icon-white"></i> Мои объявления'.html_safe, my_blurbs_path
+                - else
+                  = link_to '<i class="icon-plus icon-white"></i> Добавить объявление'.html_safe, my_blurbs_path
+              %li.divider-vertical
+              %li
+                - if logged_in?
+                  = link_to '<i class="icon-envelope icon-white"></i> Мои СМС Подписки'.html_safe, my_search_queries_path
+                - else
+                  = link_to '<i class="icon-envelope icon-white"></i> СМС Подписка'.html_safe, sms_notifications_path
+              %li.divider-vertical
+              %li.visible-phone= link_to '<i class="icon-search icon-white"></i> Расширенный Поиск'.html_safe, edit_search_path
+              %li= link_to '<i class="icon-eye-open icon-white"></i> Поиск по Номеру Телефона'.html_safe, new_phone_search_path
+              - if search.present?
+                %li.visible-phone= link_to '<i class="icon-remove-sign icon-white"></i> Очистить Поиск'.html_safe, edit_search_path, method: :put
+              %li.divider-vertical
+              %li
+                - if logged_in?
+                  = link_to '<i class="icon-user icon-white"></i> Выйти'.html_safe, logout_path
+                - else
+                  = link_to '<i class="icon-user icon-white"></i> Войти'.html_safe, login_path
+
+    = render 'layouts/ad_top' if !hide_ads? && %w(production staging).include?(Rails.env)
+    #main.container
+      = yield
+      %footer.footer
+        .container
+          %p Designed and built with all the love in the world by #{mail_to 'support@avmb.by', 'PavelT', :encode => "javascript"}
+    = render 'layouts/ad_bottom' if !hide_ads? && %w(production staging).include?(Rails.env)
+    = javascript_include_tag :application
+    = yield :scripts
+    #car-name-list{ 'data-json' => car_name_autocomplete_source }
+    = render 'layouts/ads_modal' if !hide_ads? && %w(production staging).include?(Rails.env)

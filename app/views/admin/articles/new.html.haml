@@ -1,0 +1,15 @@
+.row
+  .span12
+    = form_for [:admin, article] do |f|
+      = render_errors_for article
+      %fieldset
+        %legend New article
+        .control-group
+          = f.label :title
+          = f.text_field :title, class: 'span6'
+        .control-group
+          = f.label :body
+          = f.text_area :body, class: 'span12'
+        .form-actions
+          = submit_tag 'Сохранить', class: 'btn btn-primary'
+          = link_to 'Назад', admin_articles_path, class: 'btn'

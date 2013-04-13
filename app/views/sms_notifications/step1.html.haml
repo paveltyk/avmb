@@ -1,0 +1,14 @@
+- content_for(:title) { 'Настройте фильтр для СМС подписки' }
+.row
+  = render partial: 'step_list', locals: {step: 1}
+.row
+  - if search.searchable?
+    .span12
+      %p.lead Ваш текущий фильтр: #{search}
+    .span12
+      #{link_to 'Изменить фильтр', edit_search_path(redirect_to: sms_notification_step1_path), class: 'btn btn-large'}&nbsp;&nbsp;#{link_to 'Далее', sms_notification_step2_path, class: 'btn btn-large btn-primary'}
+  - else
+    .span12
+      %p.lead Настроите, пожалуйста, фильтр, который будет использоваться при поиске подходящего авто.
+    .span12
+      = link_to 'Настроить фильтр', edit_search_path(redirect_to: sms_notification_step1_path), class: 'btn btn-large'

@@ -1,0 +1,21 @@
+- content_for(:title) { 'Номер телефона для СМС подписки' }
+.row
+  = render partial: 'sms_notifications/step_list', locals: {step: 2}
+.row
+  .span12
+    %p.lead Оставьте номер телефона на который мы будем присылать СМС когда появится интересующее Вас объявление.
+  #get-phone.span12
+    = render_flash_messages
+    = form_tag send_verification_code_path, class: 'phone-verification form-horizontal' do
+      .input-append
+        #{text_field_tag :phone, nil, class: 'input-medium phone', type: 'tel', placeholder: '+375 xx xxx xx xx'}#{submit_tag 'Проверить', class: 'btn'}
+  #verify-code.span12
+    = form_tag subscribe_to_sms_notification_path, class: 'phone-verification form-horizontal' do
+      = hidden_field_tag :phone, nil, class: 'phone'
+      .alert.alert-success.sent
+        Мы выслали код на указанный Вами номер.
+        %br
+        СМС с кодом будет доставлено в течение одной минуты.
+      %p Введите пожалуйста код (четыре латинских символа), который мы выслали на указанный номер
+      .input-append
+        #{text_field_tag :code, nil, class: 'input-medium code', placeholder: 'xxxx'}#{submit_tag 'Проверить', class: 'btn'}

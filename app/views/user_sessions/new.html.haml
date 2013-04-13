@@ -1,0 +1,14 @@
+- content_for(:title) { 'Вход :: AvMobile' }
+.row
+  .span3
+    = form_tag({action: :verify_code}, method: :put) do
+      %fieldset
+        .visible-desktop
+          %legend Вход
+        = render_flash_messages
+        = render_errors_for @user if @user
+        .control-group
+          = label_tag :phone, 'Номер телефона'
+          = text_field_tag :phone, nil, class: 'input-medium phone', type: 'tel', placeholder: '+375 xx xxx xx xx'
+        .form-actions
+          = submit_tag 'Выслать код', class: 'btn btn-primary'

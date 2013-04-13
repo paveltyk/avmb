@@ -1,0 +1,25 @@
+- content_for(:title) { 'Купить авто в Минске. Объявления о продаже авто.' }
+.landing
+  .promo.hidden-phone
+    .row
+      .span12
+        %p.l1 У нас уже <b>#{number_with_delimiter Blurb.count}</b> объявлений
+        %p.l2 <b>#{number_with_delimiter Blurb.where(:created_at.gte => 2.week.ago).count}</b> за последнии две недели
+        = link_to 'Добавить объявление', logged_in? ? new_my_blurb_path : my_blurbs_path, class: 'btn btn-large btn-success add-blurb'
+  .details
+    .row
+      .span4
+        .well
+          = link_to '<i class="icon-eye-open icon-white"></i> Проверить Телефон'.html_safe, new_phone_search_path, class: 'btn btn-large btn-warning'
+          %br
+          Вы можете искать объявления по <b>номеру телефона</b> продавца. Проверьте, не перекуп ли это!
+      .span4
+        .well
+          = link_to '<i class="icon-search icon-white"></i> Поиск Объявлений'.html_safe, blurbs_path, class: 'btn btn-large btn-primary'
+          %br
+          Удобный и интуитивно понятный <b>поиск</b> позволит быстро найти интересующее Вас авто.
+      .span4
+        .well
+          = link_to '<i class="icon-envelope icon-white"></i> СМС Подписка'.html_safe, sms_notifications_path, class: 'btn btn-large btn-info'
+          %br
+          Когда кто-нибудь опубликует интересующее Вас объявление, мы моментально отправим Вам <b>СМС</b>.

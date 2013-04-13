@@ -1,0 +1,26 @@
+.row
+  .span9
+    - if blurbs.present?
+      %table#blurbs-list.table.table-striped
+        %thead
+          %tr
+            %th
+            %th
+            %th= link_to 'Цена', blurbs_path(order: order.to_param)
+        %tbody
+          - BlurbDecorator.decorate(blurbs).each do |blurb|
+            %tr{ 'data-url' => blurb_path(blurb) }
+              %td.avatar
+                .span1.thumbnail= link_to image_tag(blurb.avatar_path), blurb
+              %td= link_to blurb.name, blurb
+              %td= blurb.price
+    - else
+      .well
+        По Вашему запросу ничего не найдено.
+        Попробуйте #{link_to 'изменить критерии поиска', edit_search_path}, #{link_to 'очистить поиск', {:controller => :search, action: :update}, method: :put}
+        или #{link_to 'подпишитесь на СМС уведомления', sms_notification_step1_path}.
+  .span3.hidden-phone
+    %div{style: 'border-left:1px dashed #ddd;padding-left:20px'}= render partial: 'search/form'
+.row
+  .span12
+    = paginate blurbs

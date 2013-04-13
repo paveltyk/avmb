@@ -1,0 +1,22 @@
+- step = nil unless defined?(:step)
+.span4
+  .well{class: sms_step_element_class(1, step)}
+    .featureicon <i class="icon-search-full"></i>
+    .featuredesc
+      %h3 1. Настройте фильтр
+      %p Вы уже наверное настроили фильтр, когда искали подходящее авто
+    .clr
+.span4
+  .well{class: sms_step_element_class(2, step)}
+    .featureicon <i class="icon-phone-full"></i>
+    .featuredesc
+      %h3 2. Введите номер
+      %p Введите номер телефона, на который будут приходить СМС
+    .clr
+.span4
+  .well{class: sms_step_element_class(3, step)}
+    .featureicon <i class="icon-mail-full"></i>
+    .featuredesc
+      %h3 3. Получайте СМС
+      %p Когда появится объявление для Вас &mdash; мы сразу отправим СМС
+    .clr
